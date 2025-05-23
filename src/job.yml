@@ -10,5 +10,5 @@ inputs:
   reg_rate: 0.01
 environment: azureml:AzureML-sklearn-0.24-ubuntu18.04-py37-cpu@latest
 compute: azureml:ml-imane
-experiment_name: diabetes-training
-description:  MLOps Challenge 1 – job.yml modifié
+experiment_name: diabetes-training-GitHubManual
+description:  MLOps Challenge 1 – job.yml modifié Github
