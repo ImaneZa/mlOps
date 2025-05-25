@@ -23,7 +23,7 @@ jobs:
 
       - name: Run linting
         run: |
-          tests/.flake8
+          flake8 .
 
   test:
     name: Unit tests
