@@ -6,7 +6,7 @@ on:
 
 jobs:
   experiment:
-    name: Dev Training
+    name: Dev - Training
     runs-on: ubuntu-latest
     environment: development
     steps:
@@ -31,7 +31,7 @@ jobs:
             --workspace-name mlops-ws
 
   production:
-    name: Prod Training
+    name: Prod - Training
     runs-on: ubuntu-latest
     environment:
       name: production
