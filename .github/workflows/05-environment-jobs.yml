@@ -26,7 +26,7 @@ jobs:
       - name: Run Dev Job
         run: |
           az extension add -n ml -y
-          az ml job create --file job-dev.yml \
+          az ml job create --file src/job-dev.yml \
             --resource-group mlops-rg \
             --workspace-name mlops-ws
 
@@ -55,6 +55,6 @@ jobs:
       - name: Run Prod Job
         run: |
           az extension add -n ml -y
-          az ml job create --file job-prod.yml \
+          az ml job create --file src/job-prod.yml \
             --resource-group mlops-rg \
             --workspace-name mlops-ws
