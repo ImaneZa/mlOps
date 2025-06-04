@@ -8,7 +8,7 @@ jobs:
   experiment:
     name: dev
     runs-on: ubuntu-latest
-    environment: development
+    environment: dev   # ✅ match the GitHub environment name
     steps:
       - name: Checkout repo
         uses: actions/checkout@v3
@@ -34,7 +34,7 @@ jobs:
     name: prod
     runs-on: ubuntu-latest
     environment:
-      name: production
+      name: prod    # ✅ match the GitHub environment name
       url: https://ml.azure.com/  # Optional
     needs: experiment
     if: ${{ success() }}
