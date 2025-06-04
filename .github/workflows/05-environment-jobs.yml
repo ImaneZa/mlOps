@@ -1,0 +1,60 @@
+name: Dev & Prod Environment Training
+
+on:
+  push:
+    branches: [main]
+
+jobs:
+  experiment:
+    name: Dev Training
+    runs-on: ubuntu-latest
+    environment: development
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Run Dev Job
+        run: |
+          az extension add -n ml -y
+          az ml job create --file job-dev.yml \
+            --resource-group mlops-rg \
+            --workspace-name mlops-ws
+
+  production:
+    name: Prod Training
+    runs-on: ubuntu-latest
+    environment:
+      name: production
+      url: https://ml.azure.com/  # Optional
+    needs: experiment
+    if: ${{ success() }}
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.8'
+
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Run Prod Job
+        run: |
+          az extension add -n ml -y
+          az ml job create --file job-prod.yml \
+            --resource-group mlops-rg \
+            --workspace-name mlops-ws
